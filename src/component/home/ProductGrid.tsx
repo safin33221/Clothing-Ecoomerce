@@ -15,14 +15,16 @@ export default function ProductGrid({
   loading = false,
   onOpenDetails,
 }: ProductGridProps) {
+  const gridClasses = 'grid grid-cols-2 gap-x-4 gap-y-10 md:gap-x-6 lg:grid-cols-4';
+
   if (loading) {
     return (
-      <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-x-6 gap-y-10">
-        {Array.from({ length: 6 }).map((_, i) => (
+      <div className={gridClasses}>
+        {Array.from({ length: 8 }).map((_, i) => (
           <div key={i} className="flex flex-col animate-pulse">
-            <div className="aspect-[4/5] w-full bg-[#1C1B19] rounded-xs" />
-            <div className="mt-4 h-4 bg-[#23221E] w-3/4 rounded-xs" />
-            <div className="mt-2 h-3 bg-[#1F1E1B] w-1/2 rounded-xs" />
+            <div className="aspect-[4/5] rounded-xs bg-[#1E1E1E]" />
+            <div className="mt-4 h-4 w-3/4 rounded-xs bg-[#1E1E1E]" />
+            <div className="mt-2 h-3 w-1/2 rounded-xs bg-[#1E1E1E]" />
           </div>
         ))}
       </div>
@@ -32,8 +34,8 @@ export default function ProductGrid({
   if (products.length === 0) {
     return (
       <div className="py-20 text-center">
-        <p className="text-xl font-serif text-[#F3EDE2]">No garments found</p>
-        <p className="text-sm text-[#9C968C] mt-2">
+        <p className="font-serif text-xl text-[#F3EDE2]">No garments found</p>
+        <p className="mt-2 text-sm text-[#9C968C]">
           There are currently no pieces available in this category.
         </p>
       </div>
@@ -41,7 +43,7 @@ export default function ProductGrid({
   }
 
   return (
-    <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-x-6 gap-y-12">
+    <div className={gridClasses}>
       {products.map((product) => (
         <ProductCard
           key={product.id}
@@ -52,4 +54,3 @@ export default function ProductGrid({
     </div>
   );
 }
-

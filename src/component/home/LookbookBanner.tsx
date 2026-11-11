@@ -4,49 +4,64 @@ import React from 'react';
 import { ArrowRightIcon } from '@/component/common/Icons';
 
 export default function LookbookBanner() {
+  const lookbookImage =
+    'https://cdn.magicpatterns.com/patterns/generated-images/e9d1f77a-babc-4bc3-90cd-7f7100208aa3.jpg';
+
+  const stats = [
+    { title: 'Premium Quality', desc: 'Mill-sourced fabrics' },
+    { title: 'Modern Style', desc: 'Cut in-house' },
+    { title: 'Everyday Confidence', desc: '60-day returns' },
+  ];
+
   return (
-    <section id="lookbook" className="my-20 relative overflow-hidden rounded-xs border border-[#242320] bg-[#141412]">
-      <div className="grid grid-cols-1 lg:grid-cols-12 items-center">
-        {/* Left Column: Image with overlay */}
-        <div className="lg:col-span-7 relative h-80 sm:h-96 lg:h-[480px] w-full overflow-hidden">
+    <section id="lookbook" className="border-t border-[#2A2926]">
+      <div className="mx-auto grid max-w-7xl items-center gap-10 px-5 py-20 md:grid-cols-[5fr_6fr] md:gap-16 md:px-10 md:py-28">
+        {/* Left: Lookbook image */}
+        <div className="overflow-hidden rounded-xs bg-[#171717]">
           <img
-            src="https://cdn.magicpatterns.com/patterns/generated-images/4868ecee-a165-4c2e-83d8-24cf091515e5.jpg"
-            alt="Stello Lookbook Editorial"
-            className="w-full h-full object-cover object-top filter brightness-90"
+            src={lookbookImage}
+            alt="Stello streetwear at night"
+            className="aspect-[4/5] w-full object-cover transition-transform duration-700 hover:scale-105"
           />
-          <div className="absolute inset-0 bg-gradient-to-t lg:bg-gradient-to-r from-transparent via-[#141412]/40 to-[#141412]" />
         </div>
 
-        {/* Right Column: Editorial Copy */}
-        <div className="lg:col-span-5 p-8 sm:p-12 lg:p-14 flex flex-col justify-center">
-          <span className="text-[11px] uppercase tracking-[0.25em] text-[#C9A96E] font-medium">
-            Editorial Feature · Vol. IV
-          </span>
-
-          <h2 className="mt-3 font-serif text-3xl sm:text-4xl lg:text-5xl font-medium text-[#F3EDE2] leading-tight">
-            After hours, <em className="font-normal italic text-[#E2C99A]">style that speaks.</em>
-          </h2>
-
-          <p className="mt-4 text-sm text-[#9C968C] leading-relaxed font-light">
-            Designed for transitioning effortlessly between evening appointments and low-lit cityscapes. Heavyweight Italian wools, relaxed drop shoulders, and brushed metal hardware.
+        {/* Right: Copy & Features */}
+        <div className="max-w-lg">
+          <p className="mb-5 text-xs tracking-[0.3em] text-[#C9A96E] uppercase font-medium">
+            The Lookbook
           </p>
 
-          <div className="mt-8 flex items-center gap-4">
-            <button
-              type="button"
-              onClick={() => {
-                const el = document.getElementById('catalog');
-                el?.scrollIntoView({ behavior: 'smooth' });
-              }}
-              className="inline-flex items-center gap-2 px-6 py-3.5 bg-[#C9A96E] text-[#111111] hover:bg-[#E2C99A] text-xs font-semibold uppercase tracking-[0.18em] rounded-xs transition-colors cursor-pointer"
-            >
-              Explore Collection
-              <ArrowRightIcon className="w-4 h-4" />
-            </button>
-          </div>
+          <h2 className="font-serif text-5xl leading-[1.02] font-medium md:text-6xl text-[#F3EDE2]">
+            After hours,{' '}
+            <em className="font-normal italic text-[#E2C99A]">
+              in the city.
+            </em>
+          </h2>
+
+          <p className="mt-6 text-[15px] leading-relaxed text-[#F3EDE2]/70 font-light">
+            Heavyweight fleece, utility cargos and boots built for wet pavements. Twelve looks shot across London after dark — every piece available now.
+          </p>
+
+          <a
+            href="#shop"
+            className="mt-9 inline-flex items-center gap-3 rounded-full border border-[#F3EDE2]/25 px-7 py-3.5 text-sm whitespace-nowrap text-[#F3EDE2] transition-colors duration-150 hover:border-[#C9A96E] hover:text-[#E2C99A]"
+          >
+            Explore the lookbook
+            <ArrowRightIcon className="h-4 w-4" />
+          </a>
+
+          <dl className="mt-14 grid grid-cols-3 gap-6 border-t border-[#2A2926] pt-8">
+            {stats.map(({ title, desc }) => (
+              <div key={title}>
+                <dt className="font-serif text-base sm:text-lg leading-tight text-[#F3EDE2]">
+                  {title}
+                </dt>
+                <dd className="mt-1.5 text-xs text-[#9C968C]">{desc}</dd>
+              </div>
+            ))}
+          </dl>
         </div>
       </div>
     </section>
   );
 }
-
