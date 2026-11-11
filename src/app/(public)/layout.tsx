@@ -1,23 +1,21 @@
-import Footer from "@/component/common/Footer";
-import Navbar from "@/component/common/Navbar";
+import React from 'react';
+import Navbar from '@/component/common/Navbar';
+import Footer from '@/component/common/Footer';
+import CartDrawer from '@/component/cart/CartDrawer';
 
-
-export default async function DashboardLayout({
-    children,
+export default function PublicLayout({
+  children,
 }: {
-    children: React.ReactNode;
+  children: React.ReactNode;
 }) {
-
-
-    return (
-        <div className="min-h-screen flex flex-col md:flex-row bg-slate-50 text-slate-900">
-            <Navbar />
-
-
-            <main className="flex-1 overflow-x-hidden min-h-screen">
-                {children}
-            </main>
-            <Footer />
-        </div>
-    );
+  return (
+    <div className="min-h-screen flex flex-col bg-[#111111] text-[#F3EDE2] selection:bg-[#C9A96E] selection:text-[#111111]">
+      <Navbar />
+      <CartDrawer />
+      <main className="flex-1">
+        {children}
+      </main>
+      <Footer />
+    </div>
+  );
 }
