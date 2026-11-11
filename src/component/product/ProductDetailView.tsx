@@ -271,7 +271,7 @@ export default function ProductDetailView({
             {added && (
               <button
                 type="button"
-                onClick={() => setIsCartOpen(true)}
+                onClick={() => router.push('/bag')}
                 className="mt-3 w-full rounded-full border border-[#F3EDE2]/25 py-3.5 text-sm text-[#F3EDE2] transition-colors duration-150 hover:border-[#C9A96E] hover:text-[#E2C99A] cursor-pointer"
               >
                 View bag & check out

@@ -18,7 +18,7 @@ export default function Navbar({
   onSelectCategory,
   onOpenProduct,
 }: NavbarProps) {
-  const { totalCount, setIsCartOpen, setSelectedProduct } = useCart();
+  const { totalCount, setSelectedProduct } = useCart();
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
   const [searchOpen, setSearchOpen] = useState(false);
 
@@ -93,7 +93,7 @@ export default function Navbar({
             })}
           </nav>
 
-          {/* Right Icons: Search, Account, Bag */}
+          {/* Right Icons: Search, Account, Bag (links directly to /bag) */}
           <div className="flex items-center gap-4 text-[#F3EDE2]/90">
             <button
               type="button"
@@ -113,11 +113,10 @@ export default function Navbar({
               <UserIcon className="h-[18px] w-[18px]" strokeWidth={1.5} />
             </button>
 
-            {/* Bag Icon with count badge */}
-            <button
-              type="button"
+            {/* Bag Icon linking directly to dedicated /bag page */}
+            <Link
+              href="/bag"
               aria-label="Shopping bag"
-              onClick={() => setIsCartOpen(true)}
               className="relative transition-colors duration-150 hover:text-[#E2C99A] p-1 cursor-pointer group"
             >
               <BagIcon className="h-5 w-5" strokeWidth={1.5} />
@@ -126,7 +125,7 @@ export default function Navbar({
                   {totalCount}
                 </span>
               )}
-            </button>
+            </Link>
           </div>
         </div>
 
@@ -162,16 +161,13 @@ export default function Navbar({
               >
                 <SearchIcon className="w-4 h-4" /> Search
               </button>
-              <button
-                type="button"
-                onClick={() => {
-                  setMobileMenuOpen(false);
-                  setIsCartOpen(true);
-                }}
+              <Link
+                href="/bag"
+                onClick={() => setMobileMenuOpen(false)}
                 className="flex items-center gap-2 hover:text-[#E2C99A]"
               >
                 <BagIcon className="w-4 h-4" /> Bag ({totalCount})
-              </button>
+              </Link>
             </div>
           </div>
         )}
