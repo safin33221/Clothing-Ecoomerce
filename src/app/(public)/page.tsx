@@ -128,8 +128,8 @@ export default function HomePage() {
       </section>
 
       {/* 3. Sticky Floating Category Capsule Bar (Sticks at top while scrolling products) */}
-      <div className="sticky top-5 z-40 -mt-6 px-4 flex justify-center pointer-events-none">
-        <div className="pointer-events-auto">
+      <div className="sticky top-3 sm:top-5 z-40 -mt-5 sm:-mt-6 px-2 sm:px-4 flex justify-center pointer-events-none w-full max-w-full overflow-hidden">
+        <div className="pointer-events-auto max-w-full min-w-0">
           <CategoryTabs
             categories={categories}
             activeCategory={activeCategory}

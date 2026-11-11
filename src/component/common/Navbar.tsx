@@ -23,10 +23,10 @@ export default function Navbar({
   const [searchOpen, setSearchOpen] = useState(false);
 
   const navLinks = [
-    { label: 'New In', value: 'Winter' },
-    { label: 'Shop', value: 'All' },
-    { label: 'Lookbook', href: '#lookbook' },
-    { label: 'Journal', href: '#lookbook' },
+    { label: 'New In', href: '/shop', category: 'Winter' },
+    { label: 'Shop', href: '/shop', category: 'All' },
+    { label: 'Lookbook', href: '/#lookbook' },
+    { label: 'Journal', href: '/#lookbook' },
   ];
 
   const handleSelectFromSearch = (product: Product) => {
@@ -69,12 +69,12 @@ export default function Navbar({
           {/* Desktop Nav Links */}
           <nav className="hidden items-center gap-8 text-[13px] md:flex">
             {navLinks.map((link) => {
-              if (link.value && onSelectCategory) {
+              if (onSelectCategory && link.category) {
                 return (
                   <button
                     key={link.label}
                     type="button"
-                    onClick={() => onSelectCategory(link.value)}
+                    onClick={() => onSelectCategory(link.category)}
                     className="whitespace-nowrap transition-colors duration-150 text-[#F3EDE2]/80 hover:text-[#E2C99A] cursor-pointer"
                   >
                     {link.label}
@@ -84,7 +84,7 @@ export default function Navbar({
               return (
                 <Link
                   key={link.label}
-                  href={link.href || '#'}
+                  href={link.href}
                   className="whitespace-nowrap transition-colors duration-150 text-[#F3EDE2]/80 hover:text-[#E2C99A]"
                 >
                   {link.label}
@@ -134,19 +134,14 @@ export default function Navbar({
           <div className="md:hidden border-b border-[#2A2926] bg-[#141412]/95 backdrop-blur-xl px-6 py-4 space-y-3">
             <div className="flex flex-col space-y-2.5 text-xs uppercase tracking-[0.2em]">
               {navLinks.map((link) => (
-                <button
+                <Link
                   key={link.label}
-                  type="button"
-                  onClick={() => {
-                    if (link.value && onSelectCategory) {
-                      onSelectCategory(link.value);
-                    }
-                    setMobileMenuOpen(false);
-                  }}
+                  href={link.href}
+                  onClick={() => setMobileMenuOpen(false)}
                   className="text-left text-[#9C968C] hover:text-[#E2C99A] py-1 transition-colors cursor-pointer"
                 >
                   {link.label}
-                </button>
+                </Link>
               ))}
             </div>
 
