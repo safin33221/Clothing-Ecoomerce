@@ -1,21 +1,21 @@
 'use client';
 
 import React, { useEffect, useState } from 'react';
+import { useRouter } from 'next/navigation';
 import { Category, CategoryInfo, Product } from '@/types/product';
 import { productService } from '@/services/productService';
 import Navbar from '@/component/common/Navbar';
 import CategoryTabs from '@/component/home/CategoryTabs';
 import ProductGrid from '@/component/home/ProductGrid';
 import LookbookBanner from '@/component/home/LookbookBanner';
-import ProductModal from '@/component/home/ProductModal';
 import { ArrowRightIcon } from '@/component/common/Icons';
 
 export default function HomePage() {
+  const router = useRouter();
   const [categories, setCategories] = useState<CategoryInfo[]>([]);
   const [activeCategory, setActiveCategory] = useState<Category>('All');
   const [products, setProducts] = useState<Product[]>([]);
   const [loading, setLoading] = useState(true);
-  const [inspectProduct, setInspectProduct] = useState<Product | null>(null);
 
   // Hero background image of model in the Nocturne down puffer
   const heroImage =
@@ -87,7 +87,7 @@ export default function HomePage() {
             setActiveCategory(cat as Category);
             handleScrollToShop();
           }}
-          onOpenProduct={(prod) => setInspectProduct(prod)}
+          onOpenProduct={(prod) => router.push(`/product/${prod.id}`)}
         />
 
         {/* Hero Content */}
@@ -170,18 +170,12 @@ export default function HomePage() {
         <ProductGrid
           products={products}
           loading={loading}
-          onOpenDetails={(prod) => setInspectProduct(prod)}
+          onOpenDetails={(prod) => router.push(`/product/${prod.id}`)}
         />
       </section>
 
       {/* 5. Lookbook Editorial Section */}
       <LookbookBanner />
-
-      {/* 6. Quick View / Product Detail Modal */}
-      <ProductModal
-        product={inspectProduct}
-        onClose={() => setInspectProduct(null)}
-      />
     </div>
   );
 }

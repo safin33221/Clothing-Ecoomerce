@@ -25,9 +25,6 @@ export const productService = {
     // if (!res.ok) throw new Error('Failed to fetch products');
     // return res.json();
 
-    // Default: Mock data response with simulated network delay
-    await new Promise((resolve) => setTimeout(resolve, 80));
-
     if (category === 'All') {
       return [...MOCK_PRODUCTS];
     }
@@ -43,7 +40,6 @@ export const productService = {
     // if (!res.ok) return null;
     // return res.json();
 
-    await new Promise((resolve) => setTimeout(resolve, 50));
     const item = MOCK_PRODUCTS.find((p) => p.id === id);
     return item ? { ...item } : null;
   },
@@ -60,4 +56,3 @@ export const productService = {
     return [...CATEGORIES];
   },
 };
-
