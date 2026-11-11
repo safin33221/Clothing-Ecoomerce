@@ -14,6 +14,7 @@ import {
   RulerIcon,
 } from '@/component/common/Icons';
 import { ALL_SIZES } from '@/data/mockProducts';
+import SizeGuideModal from './SizeGuideModal';
 
 // Object position slices for the 3 gallery angles from bundle
 const THUMB_POSITIONS = ['center', '50% 25%', '50% 75%'];
@@ -66,6 +67,7 @@ export default function ProductDetailView({
   const [added, setAdded] = useState(false);
   const [sizeError, setSizeError] = useState(false);
   const [isWishlisted, setIsWishlisted] = useState(false);
+  const [sizeGuideOpen, setSizeGuideOpen] = useState(false);
 
   const handleAddToCart = () => {
     if (!selectedSize) {
@@ -185,11 +187,7 @@ export default function ProductDetailView({
 
               <button
                 type="button"
-                onClick={() =>
-                  alert(
-                    'Size Guide: Standard European sizing. Order true to size for an intentional relaxed drape.'
-                  )
-                }
+                onClick={() => setSizeGuideOpen(true)}
                 className="inline-flex items-center gap-1.5 text-xs text-[#9C968C] transition-colors duration-150 hover:text-[#E2C99A] cursor-pointer"
               >
                 <RulerIcon className="h-3.5 w-3.5" />
@@ -319,6 +317,19 @@ export default function ProductDetailView({
           </div>
         </div>
       </section>
+
+      {/* 5. Size Guide Modal */}
+      <SizeGuideModal
+        isOpen={sizeGuideOpen}
+        onClose={() => setSizeGuideOpen(false)}
+        onSelectSize={(s) => {
+          setSelectedSize(s);
+          setSizeError(false);
+          setAdded(false);
+        }}
+        selectedSize={selectedSize}
+        categoryName={product.category}
+      />
     </div>
   );
 }
