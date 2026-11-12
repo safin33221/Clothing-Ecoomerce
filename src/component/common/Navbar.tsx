@@ -14,7 +14,6 @@ interface NavbarProps {
 }
 
 export default function Navbar({
-  current = 'home',
   onSelectCategory,
   onOpenProduct,
 }: NavbarProps) {

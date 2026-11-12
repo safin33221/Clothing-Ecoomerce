@@ -256,6 +256,11 @@ export default function BagPage() {
                     Apply
                   </button>
                 </form>
+                {promoApplied && (
+                  <p className="mt-2 text-xs text-[#C9A96E]">
+                    Promo code applied successfully.
+                  </p>
+                )}
 
                 {/* Disclaimers */}
                 <p className="mt-6 text-xs leading-relaxed text-[#6B665E]">

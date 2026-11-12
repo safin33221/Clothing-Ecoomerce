@@ -54,7 +54,7 @@ export default function ProductDetailView({
   relatedProducts,
 }: ProductDetailViewProps) {
   const router = useRouter();
-  const { addToCart, setIsCartOpen } = useCart();
+  const { addToCart } = useCart();
 
   const outOfStockSizes = OUT_OF_STOCK[product.id] || [];
   const firstAvailable =

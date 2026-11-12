@@ -3,7 +3,7 @@
 import React from 'react';
 import { Product } from '@/types/product';
 import { useCart } from '@/context/CartContext';
-import { BagIcon, PlusIcon } from '@/component/common/Icons';
+import { PlusIcon } from '@/component/common/Icons';
 
 interface ProductCardProps {
   product: Product;

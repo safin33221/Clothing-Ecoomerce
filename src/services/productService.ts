@@ -12,7 +12,7 @@ import { CATEGORIES, MOCK_PRODUCTS } from '@/data/mockProducts';
  * and point it to your API endpoint (e.g. process.env.NEXT_PUBLIC_API_URL).
  */
 
-const API_BASE_URL = process.env.NEXT_PUBLIC_API_URL || '';
+export const API_BASE_URL = process.env.NEXT_PUBLIC_API_URL || '';
 
 export const productService = {
   /**

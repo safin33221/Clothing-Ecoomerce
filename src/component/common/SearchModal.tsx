@@ -1,7 +1,6 @@
 'use client';
 
-import React, { useState, useEffect } from 'react';
-import Link from 'next/link';
+import React, { useState, useEffect, useMemo } from 'react';
 import { Product } from '@/types/product';
 import { productService } from '@/services/productService';
 import { CloseIcon, SearchIcon } from './Icons';
@@ -15,32 +14,29 @@ interface SearchModalProps {
 export default function SearchModal({ isOpen, onClose, onSelectProduct }: SearchModalProps) {
   const [query, setQuery] = useState('');
   const [allProducts, setAllProducts] = useState<Product[]>([]);
-  const [results, setResults] = useState<Product[]>([]);
 
   useEffect(() => {
     if (isOpen) {
       productService.getProducts('All').then((data) => {
         setAllProducts(data);
       });
-    } else {
-      setQuery('');
-      setResults([]);
     }
   }, [isOpen]);
 
-  useEffect(() => {
-    if (!query.trim()) {
-      setResults([]);
-      return;
-    }
+  const handleClose = () => {
+    setQuery('');
+    onClose();
+  };
+
+  const results = useMemo(() => {
+    if (!query.trim()) return [];
     const lower = query.toLowerCase();
-    const filtered = allProducts.filter(
+    return allProducts.filter(
       (p) =>
         p.name.toLowerCase().includes(lower) ||
         p.category.toLowerCase().includes(lower) ||
         p.detail.toLowerCase().includes(lower)
     );
-    setResults(filtered);
   }, [query, allProducts]);
 
   if (!isOpen) return null;
@@ -50,7 +46,7 @@ export default function SearchModal({ isOpen, onClose, onSelectProduct }: Search
       {/* Backdrop */}
       <div
         className="fixed inset-0 bg-black/80 backdrop-blur-xs transition-opacity"
-        onClick={onClose}
+        onClick={handleClose}
       />
 
       <div className="relative min-h-screen px-4 pt-20 pb-12 flex justify-center">
@@ -77,7 +73,7 @@ export default function SearchModal({ isOpen, onClose, onSelectProduct }: Search
             )}
             <button
               type="button"
-              onClick={onClose}
+              onClick={handleClose}
               className="p-1.5 text-[#9C968C] hover:text-[#F3EDE2] rounded-full hover:bg-[#222] transition-colors"
               aria-label="Close search"
             >
@@ -121,7 +117,7 @@ export default function SearchModal({ isOpen, onClose, onSelectProduct }: Search
                   <div
                     key={product.id}
                     onClick={() => {
-                      onClose();
+                      handleClose();
                       onSelectProduct?.(product);
                     }}
                     className="flex items-center gap-4 p-2 rounded-xs hover:bg-[#1E1D1A] transition-colors cursor-pointer group"
